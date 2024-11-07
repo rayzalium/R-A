@@ -18,9 +18,17 @@ class LogSheetController extends Controller
     public function index()
     {
 
-        $LogSheet = LogSheet::latest();
+        $logSheets = LogSheet::all();
 
-       return view('Pilot.index');
+    // Pass the records to the view
+    return view('Admin.LogSheet.index', compact('logSheets'));
+    }
+
+    public function trash()
+    {
+     $LogSheet = LogSheet::onlyTrashed()->get();
+   // $cycleA = cycleA::withTrashed()->latest()->paginate(200);
+       return view('Admin.LogSheet.trash', compact('LogSheet'));
     }
 
     /**
@@ -98,157 +106,31 @@ $difference = $hours + ($minutes / 100); // This will give a result like 1.30 or
 
 
 
-        // Increment the `current` column in `hours` table by the difference
-
-
         return response()->json(['success' => true, 'message' => 'LogSheet saved successfully!']);
 
-
-        // Return JSON response with success message and timeDifference to trigger AJAX increment
-      /*  return response()->json([
-            'success' => true,
-            'message' => 'LogSheet saved successfully.',
-            'timeDifference' => $timeDifference
-        ]);return response()->json(['message' => 'LogSheet saved successfully']);*/
     }
 
-/*
-    public function updateCyclesAndHours(Request $request)
-{
-    $name_of_plane = $request->input('name_of_plane');
-    $takeoffTime = $request->input('takeoff_time');
-    $landingTime = $request->input('landing_time');
-
-    // Calculate the time difference in hours
-    $takeoff = Carbon::parse($takeoffTime);
-    $landing = Carbon::parse($landingTime);
-    $timeDifference = $landing->diffInHours($takeoff);
-
-    if ($name_of_plane == 'AFA320') {
-        // Update CycleA and HourA current
-        Log::info('Incrementing CycleA and HourA');
-        DB::table('cycle_a_s')->increment('current', 1);
-        DB::table('hours')->increment('current', $timeDifference);
-    } elseif ($name_of_plane == 'AFB320') {
-        // Update CycleB and HourB
-        Log::info('Incrementing CycleB and HourB');
-        DB::table('cycle_b_s')->increment('current', 1);
-        DB::table('hour_b_s')->increment('current', $timeDifference);
-    } elseif ($name_of_plane == 'AFC320') {
-        // Update CycleC and HourC
-        Log::info('Incrementing CycleC and HourC');
-        DB::table('cycle_c_s')->increment('current', 1);
-        DB::table('hourcs')->increment('current', $timeDifference);
-    }
-
-    return response()->json(['message' => 'Cycles and Hours updated successfully']);
-}
-
-/*
-    public function updateHourA(Request $request)
-{
-    $timeDifference = $request->input('timeDifference');
-    DB::table('hours')->increment('current', $timeDifference);
-
-    return response()->json(['success' => true]);
-}
-
-public function updateHourB(Request $request)
-{
-    $timeDifference = $request->input('timeDifference');
-    DB::table('hour_b_s')->increment('current', $timeDifference);
-
-    return response()->json(['success' => true]);
-}
-
-public function updateHourC(Request $request)
-{
-    $timeDifference = $request->input('timeDifference');
-    DB::table('hourcs')->increment('current', $timeDifference);
-
-    return response()->json(['success' => true]);
-}
-/*
-    public function updateHourA(Request $request)
-    {
-        $timeDifference = $request->input('timeDifference');
-        try {
-            DB::table('hours')->increment('current', $timeDifference);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to update HourA: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to update HourA.']);
-        }
-    }
-    public function updateHourB(Request $request)
-    {
-        $timeDifference = $request->input('timeDifference');
-        try {
-            DB::table('hour_b_s')->increment('current', $timeDifference);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to update HourB: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to update HourB.']);
-        }
-    }
-    public function updateHourC(Request $request)
-    {
-        $timeDifference = $request->input('timeDifference');
-        try {
-            DB::table('hourcs')->increment('current', $timeDifference);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to update HourC: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to update HourC.']);
-        }
-    }
-
-    public function incrementCycleA(Request $request)
-    {
-        try {
-            DB::table('cycle_a_s')->increment('current', 1);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to increment CycleA: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to increment CycleA.']);
-        }
-    }
-    public function incrementCycleB(Request $request)
-    {
-        try {
-            DB::table('cycle_b_s')->increment('current', 1);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to increment CycleB: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to increment CycleB.']);
-        }
-    }
-    public function incrementCycleC(Request $request)
-    {
-        try {
-            DB::table('cycle_c_s')->increment('current', 1);
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            \Log::error("Failed to increment CycleC: " . $e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Failed to increment CycleC.']);
-        }
-    }
-*/
 
     /**
      * Display the specified resource.
      */
     public function show(LogSheet $logSheet)
     {
-        //
+        return view('Admin.LogSheet.show', compact('logSheet'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LogSheet $logSheet)
+    // LogSheet $logSheet
+    public function edit($id)
     {
-        //
+        //return view('Admin.LogSheet.edit', compact('LogSheet'));
+        // Retrieve the specific LogSheet record by its ID
+    $logSheet = LogSheet::findOrFail($id);
+
+    // Pass the record to the edit view
+    return view('Admin.LogSheet.edit', compact('logSheet'));
     }
 
     /**
@@ -256,7 +138,24 @@ public function updateHourC(Request $request)
      */
     public function update(Request $request, LogSheet $logSheet)
     {
-        //
+           // Validate the incoming data
+     $request->validate([
+        'name_of_plane' => 'required',
+        'no_of_flight' => 'required',
+        'srart_date' => 'required',  // Fixed the typo here
+        'end_date' => 'required',
+        'take_of_time' => 'required',
+        'landing_time' => 'required',
+        'deprature' => 'required',
+        'arrival' => 'required',
+    ]);
+        // Debugging: Check if the validated data is correct
+       /// dd($validatedData);
+
+    // Update the record with the validated data
+    $logSheet->update($request->all());
+         return redirect()->route('LogSheet.index')
+         ->with('success','Oh yeah updated successflly') ;
     }
 
     /**
@@ -264,6 +163,35 @@ public function updateHourC(Request $request)
      */
     public function destroy(LogSheet $logSheet)
     {
-        //
+        $LogSheet->delete();
+        return redirect()->route('LogSheet.index')
+        ->with('success','LogSheet deleted successflly') ;
+    }
+
+    public function softDelete($id)
+    {
+
+        $LogSheet = LogSheet::find($id)->delete();
+
+        return redirect()->route('LogSheet.index')
+        ->with('success','LogSheet deleted successflly') ;
+    }
+
+    public function  deleteForEver(  $id)
+    {
+
+        $LogSheet = LogSheet::onlyTrashed()->where('id' , $id)->forceDelete();
+
+        return redirect()->route('LogSheet.trash')
+        ->with('success','LogSheet deleted successflly') ;
+    }
+
+    public function backSoftDelete($id)
+    {
+   $LogSheet = LogSheet::onlyTrashed()->where('id' ,$id)->restore() ;
+      //  dd($product);
+
+        return redirect()->route('LogSheet.index')
+        ->with('success','LogSheet back successfully') ;
     }
 }

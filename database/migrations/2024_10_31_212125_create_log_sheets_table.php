@@ -23,9 +23,8 @@ return new class extends Migration
             $table->time('landing_time');
             $table->string('deprature');
             $table->string('arrival');
-
-
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

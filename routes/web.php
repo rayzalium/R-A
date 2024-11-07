@@ -76,8 +76,36 @@ Route::resource('cycleC','CycleCController');
 Route::resource('hour','HourController');
 Route::resource('hourb','HourBController');
 Route::resource('hourc','HourcController');
+Route::resource('dateA','DateAController');
+Route::resource('dateB','DateBController');
+Route::resource('dateC','DateCController');
 use App\Http\Controllers\LogSheetController;
 Route::resource('LogSheet','LogSheetController');
+use App\Http\Controllers\UserController;
+Route::resource('User', UserController::class);
+Route::get('/users', [User::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users', [UserController::class, 'store'])->name('users.store');
+// Show the form for editing the specified user
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+
+// Update the specified user in storage
+Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+// Remove the specified user from storage
+//Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+// Display the specified user
+//Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+//user delet
+Route::get('user/soft/delete/{id}', 'UserController@softDelete')
+->name('soft.delete');
+Route::get('user/soft/delete/{id}', 'UserController@softDelete')
+->name('softu.delete');
+Route::get('/trashu', 'App\Http\Controllers\UserController@trash')->name('users.trash');
+Route::get('/test', 'App\Http\Controllers\UserController@test')->name('users.test');
+Route::get('/backu/{id}', 'App\Http\Controllers\UserController@backSoftDelete')->name('users.back.trash');
+Route::get('/deleteu/{id}', 'App\Http\Controllers\UserController@deleteForEver')->name('users.delete.trash');
+
 
 
 
@@ -145,10 +173,51 @@ Route::get('/trashhc', 'App\Http\Controllers\HourcController@trash')->name('hour
 Route::get('/test', 'App\Http\Controllers\HourcController@test')->name('hourc.test');
 Route::get('/backhc/{id}', 'App\Http\Controllers\HourcController@backSoftDelete')->name('hourc.back.trash');
 Route::get('/deltehc/{id}', 'App\Http\Controllers\HourcController@deleteForEver')->name('hourc.delete.trash');
+//dateA
+Route::get('dateA/soft/delete/{id}', 'dateAController@softDelete')
+->name('soft.delete');
+Route::get('dateA/soft/delete/{id}', 'dateAController@softDelete')
+->name('softda.delete');
+use App\Http\Controllers\dateAController;
+Route::get('/trashda', 'App\Http\Controllers\dateAController@trash')->name('dateA.trash');
+Route::get('/test', 'App\Http\Controllers\dateAController@test')->name('dateA.test');
+Route::get('/backda/{id}', 'App\Http\Controllers\dateAController@backSoftDelete')->name('dateA.back.trash');
+Route::get('/delteda/{id}', 'App\Http\Controllers\dateAController@deleteForEver')->name('dateA.delete.trash');
+//dateB
+Route::get('dateB/soft/delete/{id}', 'dateBController@softDelete')
+->name('soft.delete');
+Route::get('dateB/soft/delete/{id}', 'dateBController@softDelete')
+->name('softdb.delete');
+use App\Http\Controllers\dateBController;
+Route::get('/trashdb', 'App\Http\Controllers\dateBController@trash')->name('dateB.trash');
+Route::get('/test', 'App\Http\Controllers\dateBController@test')->name('dateB.test');
+Route::get('/backdb/{id}', 'App\Http\Controllers\dateBController@backSoftDelete')->name('dateB.back.trash');
+Route::get('/deltedb/{id}', 'App\Http\Controllers\dateBController@deleteForEver')->name('dateB.delete.trash');
+//dateC
+Route::get('dateC/soft/delete/{id}', 'dateCController@softDelete')
+->name('soft.delete');
+Route::get('dateC/soft/delete/{id}', 'dateCController@softDelete')
+->name('softdc.delete');
+use App\Http\Controllers\dateCController;
+Route::get('/trashdc', 'App\Http\Controllers\dateCController@trash')->name('dateC.trash');
+Route::get('/test', 'App\Http\Controllers\dateCController@test')->name('dateC.test');
+Route::get('/backdc/{id}', 'App\Http\Controllers\dateCController@backSoftDelete')->name('dateC.back.trash');
+Route::get('/deltedc/{id}', 'App\Http\Controllers\dateCController@deleteForEver')->name('dateC.delete.trash');
+//LogSheet
+Route::get('LogSheet/soft/delete/{id}', 'LogSheetController@softDelete')
+->name('soft.delete');
+Route::get('dateC/soft/delete/{id}', 'LogSheetController@softDelete')
+->name('softl.delete');
+Route::get('/trashl', 'App\Http\Controllers\LogSheetController@trash')->name('LogSheet.trash');
+Route::get('/test', 'App\Http\Controllers\LogSheetController@test')->name('LogSheet.test');
+Route::get('/backl/{id}', 'App\Http\Controllers\LogSheetController@backSoftDelete')->name('LogSheet.back.trash');
+Route::get('/deltel/{id}', 'App\Http\Controllers\LogSheetController@deleteForEver')->name('LogSheet.delete.trash');
 
 Route::view('/hi', 'hi');
 
 Route::post('/logsheet/store', [LogSheetController::class, 'store'])->name('logsheet.store');
+Route::view('/logsheet/store', 'pilot.create')->name('logsheet.get');
+//Route::get('/logsheet/store', [LogSheetController::class, 'store'])->name('logsheet.get');
 /*Route::post('/logsheet/store', [LogSheetController::class, 'store'])->name('logsheet.store');
 
 

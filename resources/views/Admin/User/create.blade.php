@@ -7,22 +7,19 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
 
-            <form  method="POST" action="{{ route('register') }}">
+            <form  action="{{ route('users.store')}}" method="POST">
                 @csrf
                 <div class="card bg-primary shadow-soft border-light text-center py-4">
                     <div class="card-body">
 
                         <div class="form-group mb-4">
                             <label for="name">Name</label>
-                            <input   class="form-control" id="name"  type="text" name="name" :value="old('name')" required autofocus autocomplete="name" >
-                            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                            <input type="text" name="name"  class="form-control" id="name" aria-describedby="nameHelp" placeholder="name">
                         </div>
                         <div class="form-group mb-4">
-                            <label for="email"> Email</label>
-                            <input   class="form-control" id="email"  type="email" name="email" :value="old('email')" required autocomplete="username">
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <label for="email"> email</label>
+                            <input type="text" name="email"   class="form-control" id="email" aria-describedby="comIDHelp" placeholder="email">
                         </div>
-
                         <div class="form-group mb-4">
                             <label for="user_id">user_id</label>
                             <input type="text" name="user_id"  class="form-control" id="user_id" aria-describedby="passwordHelp" placeholder="user_id">
@@ -32,22 +29,9 @@
                             <label for="role"> role</label>
                             <input type="text" name="role"  class="form-control" id="role" aria-describedby="passwordHelp" placeholder="role">
                         </div>
-
                         <div class="form-group mb-4">
                             <label for="password"> password</label>
-                            <input class="form-control" id="password"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password">
-                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label for="password_confirmation"  > Confirm password</label>
-                            <input class="form-control" id="password_confirmation"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password">
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                            <input type="text" name="password"  class="form-control" id="password" aria-describedby="passwordHelp" placeholder="password">
                         </div>
 
 
