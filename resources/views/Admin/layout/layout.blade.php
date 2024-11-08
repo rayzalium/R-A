@@ -48,7 +48,7 @@
 
             <ul class="nav flex-column pt-3 pt-md-0">
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
                         <span class="sidebar-text">Home</span>
 
                     </a>
@@ -71,14 +71,14 @@
                                 </a>
                                 <div class="collapse" id="submenu-on-cycle">
                                     <ul class="nav flex-column dropdown-menu-end">
-                                        <li class="nav-item-selected">
-                                            <a class="nav-link-selected" href="{{ route('cycleA.index')}}">AFA</a>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('cycleA.index')}}">AFA</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{ route('cycleB.index')}}">AFB</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFC</a>
+                                            <a class="nav-link" href="{{ route('cycleC.index')}}">AFC</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -97,13 +97,13 @@
                                 <div class="collapse" id="submenu-hour">
                                     <ul class="nav flex-column dropdown-menu-end">
                                         <li class="nav-item" aria-current="true">
-                                            <a class="nav-link"  href="">AFA</a>
+                                            <a class="nav-link"  href="{{ route('hour.index')}}">AFA</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFB</a>
+                                            <a class="nav-link" href="{{ route('hourb.index')}}">AFB</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFC</a>
+                                            <a class="nav-link" href="{{ route('hourc.index')}}">AFC</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -118,19 +118,47 @@
                                 <div class="collapse" id="submenu-on-date">
                                     <ul class="nav flex-column dropdown-menu-end">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFA</a>
+                                            <a class="nav-link" href="{{ route('dateA.index')}}">AFA</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFB</a>
+                                            <a class="nav-link" href="{{ route('dateB.index')}}">AFB</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">AFC</a>
+                                            <a class="nav-link" href="{{ route('dateC.index')}}">AFC</a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="{{ route('LogSheet.index')}}" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                        <span class="sidebar-text">LogSheets</span>
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="{{ route('User.index')}}" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                        <span class="sidebar-text">Users</span>
+
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                        <span class="sidebar-text">Notifications</span>
+
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                        <span class="sidebar-text">Reports</span>
+
+                    </a>
                 </li>
             <!-- Move the button to be outside the main list but within the sidebar-inner div -->
          <div>
