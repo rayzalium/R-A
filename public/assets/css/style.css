@@ -32268,7 +32268,15 @@ article a:hover {
     background-color:  rgb(240, 240, 240); /* Background color */
     color: #ffffff; /* Text color */
     display: flex;
-    flex-direction: column; /* Align items vertically */
+    flex-direction: column;
+
+
+    z-index: 2; /* Higher than header to appear in the foreground */
+
+
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto; /* Align items vertically */
 }
 
 .sidebar-inner {
@@ -32395,3 +32403,48 @@ legend {
     color: black;
 
 }
+
+
+
+.highlight-yellow {
+            background-color: yellow;
+        }
+.highlight-red {
+            background-color: red;
+        }
+
+.fa-bell {
+
+            font-family: 'Font Awesome 5 Free';
+            font-size: x-large;
+        }
+        .header-global {
+            position: relative;
+            top: 0;
+            left: 0;
+            height: 40px; /* Reduced height */
+            width: 100%;
+            background-color: #007bff; /* Adjust color as needed */
+            color: white;
+            padding: 0 20px; /* Adjusted padding for a smaller header */
+            border-bottom: 2px solid #ffffff; /* Border at the bottom of the header */
+            display: flex;
+            align-items: center;
+            justify-content: right; /* Align content to the right */
+            gap: 10px; /* Space between items */
+            z-index: 1; /* Lower z-index than sidebar, higher than content */
+        }
+        .bg-yellow {
+            background-color: yellow;
+        }
+
+        .bg-red {
+            background-color: red;
+        }
+
+
+
+
+
+
+

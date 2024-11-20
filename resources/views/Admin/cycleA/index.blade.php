@@ -44,8 +44,8 @@
                             <th class="border-0" scope="col" >ID</th>
                             <th class="border-0" scope="col" >Name</th>
                             <th class="border-0" scope="col" >Serial No.</th>
-                            <th class="border-0" scope="col" >Current cycle</th>
-                            <th class="border-0" scope="col" >Max cycle</th>
+                            <th class="border-0" scope="col" >current</th>
+                            <th class="border-0" scope="col" >max </th>
                             <th class="border-0" scope="col" id="females" >Action</th>
 
 
@@ -57,7 +57,14 @@
                            $i =0;
                         @endphp
                         @foreach ($cycleA as $cycle)
-                        <tr>
+                        @php
+                            $difference =$cycle->max - $cycle->current;
+                        @endphp
+                        <tr class="
+                        @if ($difference < 5) highlight-red
+                        @elseif ($difference < 10) highlight-yellow
+                        @endif
+                    ">
                             <th scope="row">{{++ $i}}</th>
                             <td>{{$cycle->name}}</td>
                             <td>{{$cycle->serial}}</td>

@@ -10,6 +10,7 @@ class DAteA extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'd_ate_a_s';
     protected $fillable = ['name','serial','start','max'];
     protected $dates = ['deleted_at'];
 }

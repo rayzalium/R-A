@@ -38,6 +38,9 @@
                 <div class="mb-5">
 
                     <div class="container">
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
                     <table class="table shadow-soft rounded">
                     <thead >
                         <tr>
@@ -57,7 +60,19 @@
                            $i =0;
                         @endphp
                         @foreach ($dateC as $item)
-                        <tr>
+                        @php
+                        $endDate = Carbon::parse($item->max);
+                        $currentDate = Carbon::now();
+                        $diffInDays = $endDate->diffInDays($currentDate, false);
+                        $rowClass = '';
+
+                        if ($diffInDays <= 0 && $diffInDays >= -7) {
+                            $rowClass = 'bg-red'; // Red for dates within the past 1-7 days
+                        } elseif ($diffInDays < -7 && $diffInDays >= -30) {
+                            $rowClass = 'bg-yellow'; // Yellow for dates within the past 7-30 days
+                        }
+                    @endphp
+                    <tr class="{{ $rowClass }}">
                             <th scope="row">{{++ $i}}</th>
                             <td>{{$item->name}}</td>
                             <td>{{$item->serial}}</td>
@@ -75,6 +90,9 @@
                                       <div class="col-sm">
                                         <a class="btn btn-primary ml-2" type="button" href="{{route('softdc.delete',$item->id)}}"><i class="fas fa-solid fa-trash"></i></a>
                                       </div>
+                                      {{-- <div class="col-sm">
+                                        <a class="btn btn-primary ml-2" type="button" href="{{route('softdca.delete',$item->id)}}"><i class="fas fa-solid fa-trash"></i></a>
+                                      </div> --}}
                                       {{--
                  <div class="col-sm">
                                         <form action="{{route('cycleA.destroy',$item->id)}}" method="POST">

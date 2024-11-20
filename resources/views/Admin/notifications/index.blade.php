@@ -5,14 +5,13 @@
         <div class="container">
             <div class="row justify-content-left">
                 <div class="col-lg-12">
-                    <span class="h5">Cycle B</span>
+                    <span class="h5">Notifications</span>
                 </div>
 
                                 <div class="row justify-content-left">
                                     <div class="col-lg-12">
                                         <div class="mb-3">
-                                            <a class="btn btn-primary" type="button" href="{{route('cycleB.create')}}"> ADD</button></a>
-                                            <a class="btn btn-primary" type="button" href="{{route('cycleB.trash')}}"> Trash</button></a>
+
                                         </div>
                                         <!--Buttons-->
 
@@ -42,10 +41,9 @@
                     <thead >
                         <tr>
                             <th class="border-0" scope="col" >ID</th>
-                            <th class="border-0" scope="col" >Name</th>
-                            <th class="border-0" scope="col" >Serial No.</th>
-                            <th class="border-0" scope="col" >Current cycle</th>
-                            <th class="border-0" scope="col" >Max cycle</th>
+                            <th class="border-0" scope="col" >Message</th>
+                            <th class="border-0" scope="col" >Is read</th>
+
                             <th class="border-0" scope="col" id="females" >Action</th>
 
 
@@ -56,32 +54,25 @@
                         @php
                            $i =0;
                         @endphp
-                        @foreach ($cycleB as $item)
-                        @php
-                            $difference =$item->max - $item->current;
-                        @endphp
-                        <tr class="
-                        @if ($difference < 5) highlight-red
-                        @elseif ($difference < 10) highlight-yellow
-                        @endif
-                    ">
-                            <th scope="row">{{++ $i}}</th>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->serial}}</td>
-                            <td>{{$item->current}}</td>
-                            <td>{{$item->max}}</td>
+                        @foreach ($notifications as $item)
+                        <tr>
+
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->message}}</td>
+                            <td>{{$item->is_read}}</td>
+
                             <td>
                                 <div class="container">
                                     <div class="row">
-                                      <div class="col-sm">
-                                        <a class="btn btn-primary" type="button" href="{{route('cycleB.edit',$item->id)}}"><i class="fas fa-solid fa-pen"></i></a>                                          </div>
 
                                       <div class="col-sm">
-                                        <a class="btn btn-primary ml-2" type="button" href="{{route('cycleB.show',$item->id)}}"><i class="fas fa-light fa-eye"></i></a>
-                                      </div>
-                                      <div class="col-sm">
-                                        <a class="btn btn-primary ml-2" type="button" href="{{route('softcb.delete',$item->id)}}"><i class="fas fa-solid fa-trash"></i></a>
-                                      </div>
+                                        <form action="{{ route('notifications.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this notification?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+
+
                                       {{--
                  <div class="col-sm">
                                         <form action="{{route('cycleA.destroy',$item->id)}}" method="POST">

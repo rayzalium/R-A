@@ -57,7 +57,15 @@
                            $i =0;
                         @endphp
                         @foreach ($hour as $item)
-                        <tr>
+                        @php
+                            $difference =$item->max - $item->current;
+                        @endphp
+                        <tr class="
+                        @if ($difference < 10 && $difference > -10) highlight-red
+                        @elseif ($difference < 100) highlight-yellow
+                        @endif
+                    ">
+
                             <th scope="row">{{++ $i}}</th>
                             <td>{{$item->name}}</td>
                             <td>{{$item->serial}}</td>

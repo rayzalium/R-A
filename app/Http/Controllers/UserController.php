@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -117,10 +119,12 @@ class UserController extends Controller
     $users->email = $request->input('email');
     $users->user_id = $request->input('user_id');
     $users->role = $request->input('role');
-    $users->password = $request->input('password');
+    $users->password = Hash::make($request->input('password'));
     // Update other fields as needed
 
     $users->save(); // Save the changes
+
+    Auth::login($users);
 
     // Redirect back with a success message
     return redirect()->route('User.index')->with('success', 'User updated successfully.');

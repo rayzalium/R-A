@@ -106,6 +106,37 @@ Route::get('/test', 'App\Http\Controllers\UserController@test')->name('users.tes
 Route::get('/backu/{id}', 'App\Http\Controllers\UserController@backSoftDelete')->name('users.back.trash');
 Route::get('/deleteu/{id}', 'App\Http\Controllers\UserController@deleteForEver')->name('users.delete.trash');
 
+//Notifications
+
+use App\Http\Controllers\NotificationsController;
+
+Route::get('/notifications', [NotificationsController::class, 'index'])->name('notifications.index');
+Route::get('/notifications/view', [NotificationsController::class, 'view'])->name('notification.index');
+Route::post('/notifications/{id}/read', [NotificationsController::class, 'markAsRead'])->name('notifications.markAsRead');
+Route::delete('/notifications/{id}', [NotificationsController::class, 'destroy'])->name('notifications.destroy');
+
+Route::get('/test-end-dates', [NotificationsController::class, 'checkEndDates']);
+
+use App\Http\Controllers\ReportController;
+
+Route::get('/export', [ReportController::class, 'export']);
+
+Route::get('/export-hours', [ReportController::class, 'exportHours']);
+Route::get('/export-dates', [ReportController::class, 'exportDates']);
+
+Route::view('/export2', 'export');
+Route::view('/dashboardh', 'dashboardh');
+
+use App\Http\Controllers\DashboardController;
+
+Route::get('/active-users', [DashboardController::class, 'getActiveUsers']);
+Route::get('/average-cycle-usage', [DashboardController::class, 'getAverageCycleUsage']);
+Route::get('/cycles-near-limit', [DashboardController::class, 'getCyclesNearLimit']);
+Route::get('/total-hours', [DashboardController::class, 'getTotalHours']);
+Route::get('/upcoming-events', [DashboardController::class, 'getUpcomingEvents']);
+
+
+
 
 
 
@@ -115,6 +146,7 @@ Route::get('cycleA/soft/delete/{id}', 'CycleAController@softDelete')
 Route::get('cycleA/soft/delete/{id}', 'CycleAController@softDelete')
 ->name('soft.delete');
 use App\Http\Controllers\CycleAController;
+Route::get('/test-notifications', [CycleAController::class, 'checkCycles']);
 Route::get('/trash', 'App\Http\Controllers\CycleAController@trash')->name('cycleA.trash');
 Route::get('/test', 'App\Http\Controllers\CycleAController@test')->name('cycleA.test');
 Route::get('/back/{id}', 'App\Http\Controllers\CycleAController@backSoftDelete')->name('cycleA.back.trash');
@@ -196,7 +228,7 @@ Route::get('/deltedb/{id}', 'App\Http\Controllers\dateBController@deleteForEver'
 //dateC
 Route::get('dateC/soft/delete/{id}', 'dateCController@softDelete')
 ->name('soft.delete');
-Route::get('dateC/soft/delete/{id}', 'dateCController@softDelete')
+Route::get('dateCe/soft/delete/{id}', 'dateCController@softDelete')
 ->name('softdc.delete');
 use App\Http\Controllers\dateCController;
 Route::get('/trashdc', 'App\Http\Controllers\dateCController@trash')->name('dateC.trash');

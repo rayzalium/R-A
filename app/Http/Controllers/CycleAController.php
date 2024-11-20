@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\cycleA;
 use Illuminate\Http\Request;
+use App\Http\Controllers\NotificationsController;
+use App\Models\Notification;
 
 class CycleAController extends Controller
 {
@@ -134,6 +136,55 @@ class CycleAController extends Controller
         return redirect()->route('cycleA.index')
         ->with('success','product back successfully') ;
     }
+
+
+/*
+    protected $notificationsController;
+
+    public function __construct(NotificationsController $notificationsController)
+    {
+        $this->notificationsController = $notificationsController;
+    }
+
+    public function checkCycles()
+{
+    $cycles = CycleA::all();
+
+    foreach ($cycles as $cycle) {
+        $difference = $cycle->max - $cycle->current;
+
+        if ($difference < 10) {
+            // Check if a notification for this cycle already exists to avoid duplicates
+            $existingNotification = Notification::where('message', "The AFA part :Cycle {$cycle->name} is in critical condition and the remaining Cycles are  {$difference}.")
+                ->where('is_read', false)
+                ->first();
+
+            if (!$existingNotification) {
+                Notification::create([
+                    'message' => "The AFA part :Cycle {$cycle->name} is in critical condition and the remaining Cycles are  {$difference}.",
+                    'is_read' => false,
+                ]);
+            }
+        }
+
+        // New condition to check if difference is 0 and create a separate notification
+        if ($difference === 0) {
+            // Check if a notification for this specific "max reached" already exists
+            $existingMaxNotification = Notification::where('message', "The AFA part :Cycle {$cycle->name} has reched its limit.")
+                ->where('is_read', false)
+                ->first();
+
+            if (!$existingMaxNotification) {
+                Notification::create([
+                    'message' => "The AFA part :Cycle {$cycle->name} has reched its limit.",
+                    'is_read' => false,
+                ]);
+            }
+        }
+    }
+}
+
+*/
 
 
 }

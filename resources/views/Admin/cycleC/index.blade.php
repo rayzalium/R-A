@@ -57,7 +57,14 @@
                            $i =0;
                         @endphp
                         @foreach ($cycleC as $cycle)
-                        <tr>
+                        @php
+                        $difference =$cycle->max - $cycle->current;
+                    @endphp
+                    <tr class="
+                    @if ($difference < 5) highlight-red
+                    @elseif ($difference < 10) highlight-yellow
+                    @endif
+                ">
                             <th scope="row">{{++ $i}}</th>
                             <td>{{$cycle->name}}</td>
                             <td>{{$cycle->serial}}</td>
