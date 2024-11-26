@@ -1,6 +1,6 @@
 @extends('Admin.layout.layout')
 @section('adminContent')
-<div class="main-content">
+<div class="main-content {{ auth()->check() && auth()->user()->role === 0 ? 'with-sidebar' : 'no-sidebar' }}">
     <div class="section">
         <div class="container">
             <div class="row justify-content-left">
@@ -61,8 +61,8 @@
                         $difference =$item->max - $item->current;
                     @endphp
                     <tr class="
-                    @if ($difference < 10 && $difference > -10) highlight-red
-                    @elseif ($difference < 100) highlight-yellow
+                    @if ($difference < 10 && $difference > -10) shadow-soft-r9
+                    @elseif ($difference < 100) shadow-soft-r8
                     @endif
                 ">
                             <th scope="row">{{++ $i}}</th>

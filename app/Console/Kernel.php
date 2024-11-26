@@ -13,12 +13,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // Run the check:cycles command every minute for testing (or adjust as needed)
-        $schedule->command('check:cycles')->daily();
+        $schedule->command('check:cycles')->everyMinute();
         //daily(), hourly everyMinute
          // Schedule the check:end_dates command to run daily
-         $schedule->command('check:end_dates')->daily();
-         $schedule->command('check:end_hours')->daily();
-         $schedule->call('\App\Http\Controllers\NotificationsController@sendUserReport')->daily();
+         $schedule->command('check:end_dates')->everyMinute();
+         $schedule->command('check:end_hours')->everyMinute();
+         $schedule->call('\App\Http\Controllers\NotificationsController@sendUserReport')->everyMinute();
     }
 
     protected function commands()

@@ -138,25 +138,57 @@ $difference = $hours + ($minutes / 100); // This will give a result like 1.30 or
      */
     public function update(Request $request, LogSheet $logSheet)
     {
-           // Validate the incoming data
-     $request->validate([
-        'name_of_plane' => 'required',
-        'no_of_flight' => 'required',
-        'srart_date' => 'required',  // Fixed the typo here
-        'end_date' => 'required',
-        'take_of_time' => 'required',
-        'landing_time' => 'required',
-        'deprature' => 'required',
-        'arrival' => 'required',
-    ]);
-        // Debugging: Check if the validated data is correct
-       /// dd($validatedData);
+        logger('Update method triggered for LogSheet ID:', ['id' => $logSheet->id]);
 
-    // Update the record with the validated data
-    $logSheet->update($request->all());
-         return redirect()->route('LogSheet.index')
-         ->with('success','Oh yeah updated successflly') ;
+        // Validate the input data
+        $validatedData = $request->validate([
+            'name_of_plane' => 'required|string',
+            'no_of_flight' => 'required|integer',
+            'srart_date' => 'required|date',
+            'end_date' => 'required|date',
+            'take_of_time' => 'required|date_format:H:i',
+            'landing_time' => 'required|date_format:H:i',
+            'deprature' => 'required|string',
+            'arrival' => 'required|string',
+        ]);
+
+        logger('Validated data:', $validatedData);
+
+        try {
+            // Parse and calculate the time difference
+            $takeoffTime = Carbon::createFromFormat('H:i', $validatedData['take_of_time']);
+            $landingTime = Carbon::createFromFormat('H:i', $validatedData['landing_time']);
+            $hours = $takeoffTime->diffInHours($landingTime);
+            $minutes = $takeoffTime->diffInMinutes($landingTime) % 60;
+            $timeDifference = $hours . '.' . str_pad($minutes, 2, '0', STR_PAD_LEFT);
+
+            logger('Time difference calculated:', ['timeDifference' => $timeDifference]);
+        } catch (\Exception $e) {
+            logger('Failed to calculate time difference:', ['error' => $e->getMessage()]);
+            return back()->withErrors(['error' => 'Invalid time format in input data.']);
+        }
+
+        // Update the existing record fields
+        try {
+            $logSheet->update($validatedData); // Use the update method directly on the model
+
+            logger('LogSheet updated successfully:', $logSheet->toArray());
+        } catch (\Exception $e) {
+            logger('Failed to update LogSheet:', ['error' => $e->getMessage()]);
+            return back()->withErrors(['error' => 'Failed to update logsheet: ' . $e->getMessage()]);
+        }
+
+        return redirect()->route('LogSheet.index')
+            ->with('success', 'Logsheet updated successfully!');
     }
+
+
+
+
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -6134,10 +6134,11 @@ input[type="button"].btn-block {
     display: inline-block;
     padding-top: 0.0625rem;
     padding-bottom: 0.0625rem;
-    margin-right: 1rem;
+    margin-right: ;
     font-size: 1.25rem;
     line-height: inherit;
     white-space: nowrap;
+
 }
 
 .navbar-brand:hover, .navbar-brand:focus {
@@ -21868,6 +21869,13 @@ button.section-slack:focus {
     box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff !important;
 }
 
+.shadow-soft-r9 {
+    box-shadow: 6px 6px 12px red, -6px -6px 12px red !important;
+}
+.shadow-soft-r8 {
+    box-shadow: 6px 6px 12px yellow, -6px -6px 12px yellow !important;
+}
+
 .shadow-inset {
     box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #FFFFFF !important;
 }
@@ -32259,6 +32267,7 @@ article a:hover {
 }
 
 /*# sourceMappingURL=neumorphism.css.map */
+
 .sidebar {
     height: 100vh; /* Full height */
     position: fixed; /* Fixed position */
@@ -32355,6 +32364,14 @@ article a:hover {
     border-radius: 10px; /* Rounded corners */
     box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.2), -8px -8px 15px rgba(255, 255, 255, 0.7); /* Neumorphic shadow */
 }
+.main-content.with-sidebar {
+    margin-left: 250px;
+}
+
+.main-content.no-sidebar {
+    margin-left: 0;
+}
+ 
 
 .section {
     background: #f0f0f0; /* Light background for the section */
@@ -32424,7 +32441,7 @@ legend {
             left: 0;
             height: 40px; /* Reduced height */
             width: 100%;
-            background-color: #007bff; /* Adjust color as needed */
+            /*background-color: #007bff; /* Adjust color as needed */
             color: white;
             padding: 0 20px; /* Adjusted padding for a smaller header */
             border-bottom: 2px solid #ffffff; /* Border at the bottom of the header */
@@ -32433,6 +32450,10 @@ legend {
             justify-content: right; /* Align content to the right */
             gap: 10px; /* Space between items */
             z-index: 1; /* Lower z-index than sidebar, higher than content */
+            border-bottom: 2px solid #ffffff; /* Adjust thickness and color as needed */
+    box-shadow: none;
+
+    //*margin-left: 130px*/
         }
         .bg-yellow {
             background-color: yellow;

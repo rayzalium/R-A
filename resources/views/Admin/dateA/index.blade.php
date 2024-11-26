@@ -1,6 +1,6 @@
 @extends('Admin.layout.layout')
 @section('adminContent')
-<div class="main-content">
+<div class="main-content {{ auth()->check() && auth()->user()->role === 0 ? 'with-sidebar' : 'no-sidebar' }}">
     <div class="section">
         <div class="container">
             <div class="row justify-content-left">
@@ -67,9 +67,9 @@
                         $rowClass = '';
 
                         if ($diffInDays <= 0 && $diffInDays >= -7) {
-                            $rowClass = 'bg-red'; // Red for dates within the past 1-7 days
+                            $rowClass = 'shadow-soft-r9'; // Red for dates within the past 1-7 days
                         } elseif ($diffInDays < -7 && $diffInDays >= -30) {
-                            $rowClass = 'bg-yellow'; // Yellow for dates within the past 7-30 days
+                            $rowClass = 'shadow-soft-r8'; // Yellow for dates within the past 7-30 days
                         }
                     @endphp
                     <tr class="{{ $rowClass }}">

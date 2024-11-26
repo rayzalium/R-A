@@ -85,8 +85,16 @@
     <main>
         <form action="{{ route('logsheet.store')}}" method="POST" id="logSheetForm">
             @csrf
-    <div class="col-12">
-        <div class="form-group", style="margin-top: 200px">
+            <div class="section bg-primary text-dark section-lg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-12">
+
+                            <div class="card bg-primary shadow-soft border-light text-center py-4">
+                                <div class="card-body">
+                            <div class="col-12">
+
+        <div class="form-group">
             <label class="my-1 mr-2" for="name_of_plane">name_of_plane</label>
             <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="name_of_plane">
                 <option selected name="name_of_plane" value="" >Choose...</option>
@@ -98,7 +106,7 @@
 
             </select>
         </div>
-        </div>
+
         <div class="form-group">
             <label for="exampleFormControlTextarea2">No. of Flight</label>
             <input type="text" name="no_of_flight"  class="form-control" id="exampleInputPassword" aria-describedby="passwordHelp" placeholder="No. of Flight">
@@ -141,7 +149,7 @@
                     <div class="form-group">
                         <div class="input-group input-group-border">
                             <div class="input-group-prepend"><span class="input-group-text"><span class="far fa-calendar-alt"></span></span></div>
-                            <input class="form-control datepicker" name="srart_date" id="exampleInputDate2" placeholder="Start date" type="text">
+                            <input class="form-control datepicker" name="srart_date" id="exampleInputDate2" placeholder="Start date" type="date">
                         </div>
                     </div>
                 </div>
@@ -150,7 +158,7 @@
                         <label class="h6" for="exampleInputDate3">To</label>
                         <div class="input-group input-group-border">
                             <div class="input-group-prepend"><span class="input-group-text"><span class="far fa-calendar-alt"></span></span></div>
-                            <input class="form-control datepicker" id="exampleInputDate3" name="end_date" placeholder="End date" type="text">
+                            <input class="form-control datepicker" name="end_date" id="exampleInputDate3" placeholder="End date" type="date">
                         </div>
                     </div>
                 </div>
@@ -210,7 +218,14 @@
 
 
     <button class="btn btn-primary text-success mr-2 mb-2" type="submit" >Submit </button>
-
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
 </form>
     </main>
     <!-- <a id="producthunt-badge" href="https://www.producthunt.com/posts/neumorphism-ui?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-neumorphism-ui" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=200908&theme=dark" alt="Neumorphism UI - Neumorphism inspired UI web components, sections and pages | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a> -->
@@ -288,6 +303,31 @@
                     alert('An error occurred: ' + xhr.responseText);
                 }
             });
+        });
+
+        $('#exampleInputDate2, #exampleInputDate3').datepicker({
+            format: "yyyy/mm/dd", // Date format set to 'YYYY/MM/DD'
+            autoclose: true,
+            todayHighlight: true,
+            icons: {
+                time: 'far fa-clock',
+                date: 'far fa-calendar-alt',
+                up: 'fas fa-chevron-up',
+                down: 'fas fa-chevron-down',
+                previous: 'fas fa-chevron-left',
+                next: 'fas fa-chevron-right'
+            }
+        });
+
+        // Optional: Add a validation to check date format before form submission
+        $('form').on('submit', function() {
+            const dateFrom = $('#exampleInputDate2').val();
+            const dateTo = $('#exampleInputDate3').val();
+
+            if (!moment(dateFrom, 'YYYY/MM/DD', true).isValid() || !moment(dateTo, 'YYYY/MM/DD', true).isValid()) {
+                alert('Please enter the date in the correct format (YYYY/MM/DD).');
+                return false; // Prevent submission if format is invalid
+            }
         });
     });
 </script>

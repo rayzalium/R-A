@@ -15,7 +15,7 @@ class CycleBController extends Controller
     public function index()
     {
      //   $product = Product::all();
-     $cycleB = cycleB::latest()->paginate(4);
+     $cycleB = cycleB::latest()->paginate();
        return view('Admin.cycleB.index', compact('cycleB'));
     }
 

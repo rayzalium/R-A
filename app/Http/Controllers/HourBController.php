@@ -15,7 +15,7 @@ class HourBController extends Controller
     public function index()
     {
      //   $product = Product::all();
-     $hourb = hourb::latest()->paginate(4);
+     $hourb = hourb::latest()->paginate();
        return view('Admin.hourb.index', compact('hourb'));
     }
 

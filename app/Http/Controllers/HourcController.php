@@ -15,7 +15,7 @@ class HourcController extends Controller
     public function index()
     {
      //   $product = Product::all();
-     $hourc = hourc::latest()->paginate(4);
+     $hourc = hourc::latest()->paginate();
        return view('Admin.hourc.index', compact('hourc'));
     }
 

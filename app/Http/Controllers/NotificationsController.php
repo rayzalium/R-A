@@ -276,7 +276,28 @@ public function checkEndDates()
     }
 
 
+/* after one minute
+    public function sendUserReport()
+    {
+        // Get users with roles 0 or 1
+        $users = User::whereIn('role', [0, 1])->get();
 
+        // Get notifications that are unread and older than one minute
+        $oneMinuteAgo = Carbon::now()->subMinute();
+        $notifications = Notification::where('is_read', false)
+            ->where('created_at', '<', $oneMinuteAgo)
+            ->get();
+
+        if ($notifications->isEmpty()) {
+            return;
+        }
+
+        foreach ($users as $user) {
+            // Send email report
+            Mail::to($user->email)->send(new UserReportMail($notifications));
+        }
+    }
+*/
 public function sendUserReport()
 {
     // Get users with roles 0 or 1
@@ -297,4 +318,19 @@ public function sendUserReport()
         Mail::to($user->email)->send(new UserReportMail($notifications));
     }
 }
+
+/* testing
+public function sendTestEmail()
+{
+    // Define recipient email
+    $recipient = 'zuhairimaher@gmail.com'; // Replace with the actual email
+
+    // Send email using a raw text message
+    Mail::raw('This is a test email from your Analytics System.', function ($message) use ($recipient) {
+        $message->to($recipient)
+                ->subject('Test Email from Analytics System');
+    });
+
+    return response()->json(['message' => 'Test email sent successfully!'], 200);
+}*/
 }

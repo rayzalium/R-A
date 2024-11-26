@@ -82,19 +82,120 @@
             font-size: large;
         }
 
+             /* General Analytics Styles */
+             .analytics-body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .analytics-header {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .analytics-summary-cards {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .analytics-summary-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+        }
+
+        .analytics-summary-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .analytics-summary-card p {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .analytics-overall-pie {
+            margin: 20px auto;
+            max-width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .analytics-plane-cards {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 20px auto;
+            flex-wrap: wrap;
+            max-width: 1200px;
+        }
+
+        .analytics-plane-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            box-sizing: border-box;
+        }
+
+        .analytics-plane-card:first-child {
+            margin-left: 130px; /* Move the first card slightly to the right */
+
+        }
+        .analytics-plane-card:last-child {
+            margin-right: -50px; /* Move the first card slightly to the right */
+        }
+
+        .analytics-plane-card canvas {
+            max-width: 100%;
+            height: 200px;
+        }
+
+        .analytics-plane-table {
+            margin-top: 10px;
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .analytics-plane-table th, .analytics-plane-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .analytics-plane-table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
     </style>
 
 
 </head>
-
-
 <header class="header-global d-flex pt-6 pt-md-7 border-bottom border-light bg-primary">
     <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary navbar-light">
         <div class="container position-relative">
-            <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light mr-lg-4" href="../pages/On-Cycle.html">
-                <img class="navbar-brand-dark" src="{{ asset('assets/img/yemenia-logo.png') }}" alt="Logo dark">
-                <img class="navbar-brand-light" src="{{ asset('assets/img/yemenia-logo.png') }}" alt="Logo light">
-            </a>
+            <a class="navbar-brand shadow-soft py-2 px-3 rounded border border-light" style="margin-left: 6rem;" href="../pages/On-Cycle.html">
+    <img class="navbar-brand-dark" src="{{ asset('assets/img/yemenia-logo.png') }}" alt="Logo dark">
+    <img class="navbar-brand-light" src="{{ asset('assets/img/yemenia-logo.png') }}" alt="Logo light">
+</a>
+     @auth
+    @if(auth()->user()->role === 1)
             <div class="navbar-collapse collapse" id="navbar_global">
                 <div class="navbar-collapse-header">
                     <div class="row">
@@ -103,6 +204,7 @@
                         </div>
                     </div>
                 </div>
+
                 <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="false">
@@ -110,15 +212,63 @@
                             <span class="fas fa-angle-down nav-link-arrow ml-2"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="../pages/Hour2.html">Hour</a></li>
-                            <li><a class="dropdown-item" href="../pages/ADD.html">ADD</a></li>
-                            <li><a class="dropdown-item" href="../pages/On-Cycle.html">On-Cycle</a></li>
-                            <li><a class="dropdown-item" href="../pages/on-date.html">On-Date</a></li>
+                <li class="dropdown-submenu">
+
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle dropdown-item d-flex justify-content-between align-items-center" aria-haspopup="true" aria-expanded="false">On-Cycle <i class="fas fa-angle-right nav-link-arrow"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" class="dropdown-item">AFA</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFB</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFC</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle dropdown-item d-flex justify-content-between align-items-center" aria-haspopup="true" aria-expanded="false">Hour <i class="fas fa-angle-right nav-link-arrow"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" class="dropdown-item">AFA</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFB</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFC</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="#" class="dropdown-toggle dropdown-item d-flex justify-content-between align-items-center" aria-haspopup="true" aria-expanded="false">On-Date <i class="fas fa-angle-right nav-link-arrow"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#" class="dropdown-item">AFA</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFB</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item">AFC</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                </li>
+                            <li><a class="dropdown-item" href="#">Logsheets</a></li>
+
+
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
+        @endif
+        @endauth
+
         <div class="align-items-lg-left">
             <div style="position: relative;">
                 <!-- Bell icon -->
@@ -158,7 +308,11 @@
 
 
 <body>
-    <nav id="sidebarMenu" class="sidebar">
+    <div class="layout">
+    @auth
+    @if(auth()->user()->role === 0)
+
+    <nav id="sidebarMenu" class="sidebar" >
         <div class="sidebar-inner px-4 pt-3">
             <!-- Profile Section -->
             <div class="profile-section">
@@ -171,7 +325,7 @@
 
             <ul class="nav flex-column pt-3 pt-md-0">
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center"  href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="{{ route('analytics')}}" role="button" aria-expanded="false" aria-controls="submenu-parts">
                         <span class="sidebar-text">Home</span>
 
                     </a>
@@ -278,7 +432,7 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-between align-items-center"  href="#submenu-parts" role="button" aria-expanded="false" aria-controls="submenu-parts">
+                    <a class="nav-link d-flex justify-content-between align-items-center"  href="" role="button" aria-expanded="false" aria-controls="submenu-parts">
                         <span class="sidebar-text">Reports</span>
 
                     </a>
@@ -297,6 +451,9 @@
 
         </div>
     </nav>
+   @endif
+    @endauth
+</div>
 
     @yield('adminContent')
 
@@ -322,6 +479,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         function toggleNotifications() {
             const dropdown = document.getElementById('notificationDropdown');

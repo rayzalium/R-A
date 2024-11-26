@@ -2,7 +2,7 @@
 @section('adminContent')
 
 
-<div class="main-content section bg-primary text-dark section-lg">
+<div class="main-content section bg-primary text-dark section-lg {{ auth()->check() && auth()->user()->role === 0 ? 'with-sidebar' : 'no-sidebar' }}">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12">

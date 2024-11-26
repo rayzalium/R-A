@@ -39,5 +39,27 @@
     </select>
     <button type="submit">Export Dates to Excel</button>
 </form>
+<form action="{{ route('export.excel') }}" method="GET">
+    <div>
+        <label for="plane">Select Plane:</label>
+        <select name="plane" id="plane" required>
+            <option value="AFA">AFA</option>
+            <option value="AFB">AFB</option>
+            <option value="AFC">AFC</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="filter">Select Filter:</label>
+        <select name="filter" id="filter" required>
+            <option value="Fresh">Fresh</option>
+            <option value="Critical">Critical</option>
+            <option value="Non-Critical">Non-Critical</option>
+        </select>
+    </div>
+
+    <button type="submit">Export Excel</button>
+</form>
+
 </body>
 </html>

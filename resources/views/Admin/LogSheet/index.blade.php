@@ -1,6 +1,6 @@
 @extends('Admin.layout.layout')
 @section('adminContent')
-<div class="main-content">
+<div class="main-content {{ auth()->check() && auth()->user()->role === 0 ? 'with-sidebar' : 'no-sidebar' }}">
     <div class="section">
         <div class="container">
             <div class="row justify-content-left">
